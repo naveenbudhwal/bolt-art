@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="213.658" height="275.32" viewBox="0 0 213.658 275.32">
+  <defs>
+    <linearGradient id="linear-gradient" x1="8.697" y1="-3.433" x2="8.18" y2="-2.799" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fd0"/>
+      <stop offset="1" stop-color="#fbb034"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="23.277" y1="-5.551" x2="22.649" y2="-4.99" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fbb034"/>
+      <stop offset="1" stop-color="#fd0"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="15.68" y1="-14.048" x2="15.68" y2="-15.048" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fd0"/>
+      <stop offset="0.64" stop-color="#fbb034"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_19" data-name="Group 19" transform="translate(0 -805)">
+    <g id="line1" transform="translate(0 830.373)">
+      <g id="Layer_2" data-name="Layer 2" transform="translate(0 0)">
+        <g id="BACKGROUND">
+          <path id="Path_283" data-name="Path 283" d="M0,249.776V130.934l113.8-113.8a58.5,58.5,0,1,1,82.729,82.729L46.6,249.776Z" transform="translate(0 -0.005)" fill="url(#linear-gradient)"/>
+        </g>
+      </g>
+    </g>
+    <g id="line2" transform="translate(0 805)">
+      <g id="Layer_2-2" data-name="Layer 2" transform="translate(0 0)">
+        <g id="BACKGROUND-2" data-name="BACKGROUND">
+          <path id="Path_284" data-name="Path 284" d="M0,121.979v-78.8L35.028,8.155A27.908,27.908,0,0,1,74.5,47.624Z" transform="translate(0 0.019)" fill="url(#linear-gradient-2)"/>
+        </g>
+      </g>
+    </g>
+    <g id="line3" transform="translate(83.166 1009.39)">
+      <g id="Layer_2-3" data-name="Layer 2" transform="translate(0 0)">
+        <g id="BACKGROUND-3" data-name="BACKGROUND">
+          <path id="Path_285" data-name="Path 285" d="M0,70.93,62.769,8.161a27.851,27.851,0,1,1,39.387,39.387L78.768,70.93Z" transform="translate(0 0)" fill="url(#linear-gradient-3)"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
