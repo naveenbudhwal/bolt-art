@@ -4,7 +4,7 @@
     <stack :column-min-width="300" :gutter-width="15" :gutter-height="15" monitor-images-loaded>
       <stack-item v-for="(art, i) in artworks" :key="i" style="transition: transform 300ms">
         <router-link :to="{ name: 'art_detail', params: { id: art.id }}">
-          <img class="artwork" :src="art.url" alt="BoltArt Artwork" />
+          <img class="artwork" :src="art.image" alt="BoltArt Artwork" />
         </router-link>
       </stack-item>
     </stack>
@@ -26,6 +26,7 @@
 <script>
 
 import { Stack, StackItem } from "vue-stack-grid";
+import db from '../firebase'
 
 export default {
   name: "Bolt-Art",
@@ -35,13 +36,35 @@ export default {
   },
   data() {
     return {
-
+      temp: [],
+      artworks: []
     };
   },
-  computed: {
-    artworks() {
-      return this.$store.state.artworks;
+  methods: {
+    retrieveArtworks() {
+       db.collection('artworks').get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          const art = {
+            id: doc.id,
+            name: doc.data().name,
+            image: doc.data().image,
+            tags: doc.data().tags,
+            desc: doc.data().description
+          }
+          this.artworks.push(art)
+          // this.temp.push(art)
+        })
+      })
+
+      // this.artworks = this.temp.sort((a,b) => {
+      //   return a.timestamp.seconds - b.timestamp.seconds
+      // })
+
     }
+  },
+  created() {
+    this.retrieveArtworks()
   }
 };
 </script>

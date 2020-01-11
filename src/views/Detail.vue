@@ -1,15 +1,15 @@
 <template>
   <div class="art-detail">
     <div class="art">
-      <img :src=artwork.url alt="Artwork">
+      <img :src=artwork.image alt="Artwork">
     </div>
     <div class="art-info">
       <div class="art-name">{{artwork.name}}</div>
       <div class="tag">
-        <div v-for="art_tag in artwork.tag" class="art-tag">{{art_tag}}</div>
+        <div v-for="art_tag in artwork.tags" class="art-tag"># {{art_tag}}</div>
       </div>
       <hr class="material-hr">
-      <div v-for="art_desc in artwork.desc" class="art-desc">{{art_desc}}</div>
+      <div v-for="art_desc in artwork.description" class="art-desc">{{art_desc}}</div>
       <router-link to="/artworks">
         <button class="back-btn">Go Back</button>
     </router-link>
@@ -18,12 +18,34 @@
 </template>
 
 <script>
+
+import db from '../firebase'
+
 export default {
   name: 'art_detail',
   data() {
     return {
-      artwork: this.$store.getters.artwork(this.$route.params.id)
+      artwork: {}
     }
+  },
+  methods: {
+    retrieveArt() {
+      let docRef = db.collection("artworks").doc(this.$route.params.id);
+      docRef.get().then((doc) => {
+          if (doc.exists) {
+            console.log(doc.data())
+            this.artwork = doc.data()
+          } else {
+              // doc.data() will be undefined in this case
+              console.log("No such document!");
+          }
+      }).catch(function(error) {
+          console.log("Error getting document:", error);
+      });
+    }
+  },
+  created() {
+    this.retrieveArt()
   }
 }
 </script>
