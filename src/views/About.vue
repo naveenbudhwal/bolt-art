@@ -28,7 +28,7 @@
         <a href="https://www.instagram.com/bolt_art_/" target="_blank" rel="noopener">
           <img src="../assets/instagram-brands.svg" alt="instagram">
         </a>
-        <a href="#" target="_blank" rel="noopener">
+        <a href="https://twitter.com/Bolt_Art_" target="_blank" rel="noopener">
           <img src="../assets/twitter-brands.svg" alt="twitter">
         </a>
       </div>
