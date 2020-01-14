@@ -1,30 +1,35 @@
 <template>
   <div class="photos">
     
-    <stack :column-min-width="300" :gutter-width="15" :gutter-height="15" monitor-images-loaded>
-      <stack-item v-for="(art, i) in artworks" :key="i" style="transition: transform 300ms">
-        <router-link :to="{ name: 'art_detail', params: { id: art.id }}">
-          <img class="artwork" :src="art.image" alt="BoltArt Artwork" />
-        </router-link>
-      </stack-item>
-    </stack>
+    <loading-spinner v-if="loading"></loading-spinner>
+    
+    <div v-if="!loading">
+      <stack :column-min-width="300" :gutter-width="15" :gutter-height="15" monitor-images-loaded>
+        <stack-item v-for="(art, i) in artworks" :key="i" style="transition: transform 300ms">
+          <router-link :to="{ name: 'art_detail', params: { id: art.id }}">
+            <img class="artwork" :src="art.image" alt="BoltArt Artwork" />
+          </router-link>
+        </stack-item>
+      </stack>
 
-    <div class="social-nav">
-      <a href="mailto:bolt.art2412@gmail.com" target="_blank" rel="noopener">
-        <img src="../assets/envelope-regular.svg" alt="email">
-      </a>
-      <a href="https://www.instagram.com/bolt_art_/" target="_blank" rel="noopener">
-        <img src="../assets/instagram-brands.svg" alt="instagram">
-      </a>
-      <a href="#" target="_blank" rel="noopener">
-        <img src="../assets/twitter-brands.svg" alt="twitter">
-      </a>
-    </div> 
+      <div class="social-nav">
+        <a href="mailto:bolt.art2412@gmail.com" target="_blank" rel="noopener">
+          <img src="../assets/envelope-regular.svg" alt="email">
+        </a>
+        <a href="https://www.instagram.com/bolt_art_/" target="_blank" rel="noopener">
+          <img src="../assets/instagram-brands.svg" alt="instagram">
+        </a>
+        <a href="#" target="_blank" rel="noopener">
+          <img src="../assets/twitter-brands.svg" alt="twitter">
+        </a>
+      </div> 
+    </div>
   </div>
 </template>
 
 <script>
 
+import LoadingSpinner from '../components/LoadingSpinner.vue'
 import { Stack, StackItem } from "vue-stack-grid";
 import db from '../firebase'
 
@@ -32,18 +37,21 @@ export default {
   name: "Bolt-Art",
   components: {
     Stack,
-    StackItem
+    StackItem,
+    LoadingSpinner
   },
   data() {
     return {
       temp: [],
-      artworks: []
+      artworks: [],
+      loading: true
     };
   },
   methods: {
     retrieveArtworks() {
        db.collection('artworks').get()
       .then(querySnapshot => {
+        this.loading = false
         querySnapshot.forEach(doc => {
           const art = {
             id: doc.id,
@@ -102,11 +110,11 @@ export default {
   height: 22px;
   cursor: pointer;
   margin: 0 70px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .social-nav img:hover {
-  transform: translateY(-15px);
+  transform: translateY(-8px);
 }
 
 /* ------------------Responsive Media Queries--------------------- */
