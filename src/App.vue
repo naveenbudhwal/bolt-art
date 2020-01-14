@@ -8,13 +8,13 @@
       </router-link>
       <ul class="nav-links">
         <router-link to="/">
-          <li class="nav-item">Home</li>
+          <li @click="closeNavbar" class="nav-item">Home</li>
         </router-link>
         <router-link to="/artworks">
-          <li class="nav-item">Artworks</li>
+          <li @click="closeNavbar" class="nav-item">Artworks</li>
         </router-link>
         <router-link to="/about">
-          <li class="nav-item">About</li>
+          <li @click="closeNavbar" class="nav-item">About</li>
         </router-link>
         <div class="social-nav">
           <a href="mailto:bolt.art2412@gmail.com" target="_blank" rel="noopener">
@@ -29,7 +29,7 @@
         </div>
       </ul>
 
-      <div id="nav-icon1">
+      <div id="nav-icon1" @click="openNavbar">
         <span></span>
         <span></span>
         <span></span>
@@ -42,28 +42,24 @@
 
 <script>
 
-window.addEventListener("load", function() {
-  const navLinks = document.querySelector(".nav-links");
-  const navIcon = document.querySelector('#nav-icon1');
-  const links = document.querySelectorAll(".nav-links li");
-  navIcon.addEventListener('click', function() {
-    navIcon.classList.toggle('open2');
-    navIcon.classList.toggle('fix');
-    navLinks.classList.toggle("open"); 
-    links.forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-        // hamburger.classList.remove("open1");
-        navIcon.classList.remove('open2');
-        navIcon.classList.remove('fix');
-      });
-    });  
-  })
-});  
-
-
 export default {
-  name: "Navbar"
+  name: "Navbar",
+  methods: {
+    openNavbar() {
+      const navIcon = document.querySelector('#nav-icon1')
+      const navLinks = document.querySelector('.nav-links')
+      navIcon.classList.toggle('open2');
+      navIcon.classList.toggle('fix');
+      navLinks.classList.toggle('open');
+    },
+    closeNavbar() {
+      const navIcon = document.querySelector('#nav-icon1')
+      const navLinks = document.querySelector('.nav-links')
+      navLinks.classList.remove('open')
+      navIcon.classList.remove('open2')
+      navIcon.classList.remove('fix')
+    }   
+  }
 };
 </script>
 
@@ -84,6 +80,7 @@ export default {
 
 #nav-icon1 {
   display: none;
+  /* opacity: 0; */
   width: 33px;
   height: 33px;
   /* position: absolute; */
@@ -230,6 +227,7 @@ export default {
   }
   #nav-icon1 {
     display: block;
+    /* opacity: 1; */
     margin-right: 40px;
   }
   .nav-links {
