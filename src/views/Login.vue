@@ -107,8 +107,7 @@ input:focus {
 }
 
 .copyright {
-  position: absolute;
-  bottom: 1em;
+  margin-top: 2.5em;
   font-size: 0.9rem;
 }
 
