@@ -1,6 +1,9 @@
 <template>
   <div class="art-detail">
-    <div class="art">
+
+    <loading-spinner v-if="loading"></loading-spinner>
+    
+    <div class="art" v-if="!loading">
       <img :src=artwork.image alt="Artwork">
     </div>
     <div class="art-info">
@@ -14,24 +17,31 @@
         <button class="back-btn">Go Back</button>
     </router-link>
     </div>
+    
   </div>
 </template>
 
 <script>
 
 import db from '../firebase'
+import LoadingSpinner from '../components/LoadingSpinner.vue'
 
 export default {
   name: 'art_detail',
+  components: {
+    LoadingSpinner
+  },
   data() {
     return {
-      artwork: {}
+      artwork: {},
+      loading: true
     }
   },
   methods: {
     retrieveArt() {
       let docRef = db.collection("artworks").doc(this.$route.params.id);
       docRef.get().then((doc) => {
+          this.loading = false
           if (doc.exists) {
             console.log(doc.data())
             this.artwork = doc.data()
