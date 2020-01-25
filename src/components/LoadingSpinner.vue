@@ -1,60 +1,64 @@
 <template>
   <div class="spinner">
-    <div class="bounce1"></div>
-    <div class="bounce2"></div>
-    <div class="bounce3"></div>
+    <div class="double-bounce1"></div>
+    <div class="double-bounce2"></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'loading-spinner'
-}
+  name: "loading-spinner"
+};
 </script>
 
 <style scoped>
-
 .spinner {
-  margin: 100px auto 0;
-  width: 70px;
-  text-align: center;
+  width: 40px;
+  height: 40px;
+
+  position: relative;
+  margin: auto;
 }
 
-.spinner > div {
-  width: 18px;
-  height: 18px;
+.double-bounce1,
+.double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
   background-color: #fbb034;
-  margin: 0 2px;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
 
-  border-radius: 100%;
-  display: inline-block;
-  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  -webkit-animation: sk-bounce 2s infinite ease-in-out;
+  animation: sk-bounce 2s infinite ease-in-out;
 }
 
-.spinner .bounce1 {
-  -webkit-animation-delay: -0.32s;
-  animation-delay: -0.32s;
+.double-bounce2 {
+  -webkit-animation-delay: -1s;
+  animation-delay: -1s;
 }
 
-.spinner .bounce2 {
-  -webkit-animation-delay: -0.16s;
-  animation-delay: -0.16s;
-}
-
-@-webkit-keyframes sk-bouncedelay {
-  0%, 80%, 100% { -webkit-transform: scale(0) }
-  40% { -webkit-transform: scale(1.0) }
-}
-
-@keyframes sk-bouncedelay {
-  0%, 80%, 100% { 
+@-webkit-keyframes sk-bounce {
+  0%,
+  100% {
     -webkit-transform: scale(0);
-    transform: scale(0);
-  } 40% { 
-    -webkit-transform: scale(1.0);
-    transform: scale(1.0);
+  }
+  50% {
+    -webkit-transform: scale(1);
   }
 }
 
+@keyframes sk-bounce {
+  0%,
+  100% {
+    transform: scale(0);
+    -webkit-transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+    -webkit-transform: scale(1);
+  }
+}
 </style>

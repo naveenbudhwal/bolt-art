@@ -1,33 +1,30 @@
 <template>
   <div class="art-detail">
-
     <loading-spinner v-if="loading"></loading-spinner>
-    
+
     <div class="art" v-if="!loading">
-      <img :src=artwork.image alt="Artwork">
+      <img :src="artwork.image" alt="Artwork" />
     </div>
     <div class="art-info">
       <div class="art-name">{{artwork.name}}</div>
       <div class="tag">
-        <div v-for="art_tag in artwork.tags" class="art-tag"># {{art_tag}}</div>
+        <div v-for="(art_tag,i) in artwork.tags" :key="i" class="art-tag"># {{art_tag}}</div>
       </div>
-      <hr class="material-hr">
-      <div v-for="art_desc in artwork.description" class="art-desc">{{art_desc}}</div>
+      <hr class="material-hr" />
+      <div v-for="(art_desc,j) in artwork.description" :key="j" class="art-desc">{{art_desc}}</div>
       <router-link to="/artworks">
         <button class="back-btn">Go Back</button>
-    </router-link>
+      </router-link>
     </div>
-    
   </div>
 </template>
 
 <script>
-
-import db from '../firebase'
-import LoadingSpinner from '../components/LoadingSpinner.vue'
+import db from "../firebase";
+import LoadingSpinner from "../components/LoadingSpinner.vue";
 
 export default {
-  name: 'art_detail',
+  name: "art_detail",
   components: {
     LoadingSpinner
   },
@@ -35,33 +32,35 @@ export default {
     return {
       artwork: {},
       loading: true
-    }
+    };
   },
   methods: {
     retrieveArt() {
       let docRef = db.collection("artworks").doc(this.$route.params.id);
-      docRef.get().then((doc) => {
-          this.loading = false
+      docRef
+        .get()
+        .then(doc => {
+          this.loading = false;
           if (doc.exists) {
-            console.log(doc.data())
-            this.artwork = doc.data()
+            console.log(doc.data());
+            this.artwork = doc.data();
           } else {
-              // doc.data() will be undefined in this case
-              console.log("No such document!");
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
           }
-      }).catch(function(error) {
+        })
+        .catch(function(error) {
           console.log("Error getting document:", error);
-      });
+        });
     }
   },
   created() {
-    this.retrieveArt()
+    this.retrieveArt();
   }
-}
+};
 </script>
 
 <style scoped>
-
 .art-detail {
   display: flex;
   height: 85vh;
@@ -77,7 +76,7 @@ export default {
 .art img {
   width: 350px;
   border-radius: 10px;
-  transition: all 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+  transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
 .art img:hover {
@@ -88,7 +87,7 @@ export default {
   width: 50%;
   display: flex;
   justify-content: center;
-  align-items: flex-start; 
+  align-items: flex-start;
   flex-direction: column;
 }
 
@@ -123,17 +122,18 @@ export default {
   width: 20%;
   margin: 20px 0;
   height: 5px;
-  background: #FFF9E8;
+  background: #fff9e8;
   border-radius: 5px;
   border: none;
 }
 
 .back-btn {
-  background: #2F4858;
+  background: #2f4858;
   color: #fff;
   font-weight: 500;
   border: none;
-  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0, .14), 0 1px 18px 0 rgba(0,0,0,.12);
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
   padding: 10px 20px;
   border-radius: 24px;
   cursor: pointer;
