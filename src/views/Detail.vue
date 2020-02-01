@@ -42,7 +42,6 @@ export default {
         .then(doc => {
           this.loading = false;
           if (doc.exists) {
-            console.log(doc.data());
             this.artwork = doc.data();
           } else {
             // doc.data() will be undefined in this case
@@ -94,6 +93,7 @@ export default {
 .art-name {
   font-size: 3em;
   font-weight: 500;
+  color: #2f4858;
 }
 
 .art-tag {

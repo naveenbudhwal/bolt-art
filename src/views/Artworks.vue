@@ -15,7 +15,6 @@
         >
           <router-link :to="{ name: 'art_detail', params: { id: art.id }}">
             <img class="artwork" :src="art.image" alt="BoltArt Artwork" />
-            <div class="content">Temp</div>
           </router-link>
         </stack-item>
       </stack>
@@ -95,21 +94,6 @@ export default {
 
 .artwork:hover {
   transform: translateY(-15px);
-}
-
-.content {
-  opacity: 0;
-  font-size: 1.5rem;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #1c87c9;
-  transition: all 0.3s ease-in-out;
-}
-
-.content:hover {
-  opacity: 1;
 }
 
 .loading-text {
