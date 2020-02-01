@@ -6,6 +6,7 @@ import About from '../views/About.vue'
 import Detail from '../views/Detail.vue'
 import PostArtwork from '../views/PostArtwork.vue'
 import Login from '../views/Login.vue'
+import Admin from '../views/Admin.vue'
 
 import firebase from 'firebase'
 
@@ -38,6 +39,14 @@ const routes = [
     component: Login
   },
   {
+    path: '/admin',
+    name: 'admin',
+    component: Admin,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/post-artwork',
     name: 'post-artwork',
     component: PostArtwork,
@@ -53,26 +62,13 @@ const router = new VueRouter({
   routes
 })
 
-// router.beforeResolve((to, from, next) => {
-//   // If this isn't an initial page load.
-//   if (to.name) {
-//       // Start the route progress bar.
-//       NProgress.start()
-//   }
-//   next()
-// })
-
-// router.afterEach((to, from) => {
-//   // Complete the animation of the route progress bar.
-//   NProgress.done()
-// })
 
 router.beforeEach((to, from, next) => {
   const currentUser = firebase.auth().currentUser;
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
-  if(requiresAuth && !currentUser) next('login');
-  else if(!requiresAuth && currentUser) next('post-artwork');
+  if (requiresAuth && !currentUser) next('login');
+  else if (!requiresAuth && currentUser) next('post-artwork');
   else next();
 });
 

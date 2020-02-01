@@ -28,7 +28,7 @@ export default {
   methods: {
     login() {
       firebase.auth().signInWithEmailAndPassword(this.email, this.password).then((user) => {
-        this.$router.replace('post-artwork')
+        this.$router.replace('admin')
       }).catch((error) => {
         console.log('Error logging in ' + error)
       })
