@@ -3,13 +3,25 @@
     <div class="heading">Post Artwork</div>
     <input name="art-name" v-model="artwork.name" type="text" placeholder="Name" />
     <input v-model="artwork.image" type="text" placeholder="Image URL" />
-    <div class="row">
-      <input v-model="tag" type="text" placeholder="tags" />
-      <button class="add-btn" @click="addMoreTags">Add More</button>
+    <div class="col">
+      <div class="row">
+        <input v-model="tag" type="text" placeholder="tags" />
+        <button class="add-btn" @click="addMoreTags">Add More</button>
+      </div>
+      <div class="desc" v-for="(tag,i) in artwork.tags" :key="i">
+        {{tag}}
+        <div class="close-btn" @click="deleteTags(tag)">X</div>
+      </div>
     </div>
-    <div class="row">
-      <textarea v-model="desc" name="desc" id cols="30" rows="4" placeholder="Description"></textarea>
-      <button class="add-btn" @click="addMoreDesc">Add More</button>
+    <div>
+      <div class="row">
+        <textarea v-model="desc" name="desc" id cols="30" rows="4" placeholder="Description"></textarea>
+        <button class="add-btn" @click="addMoreDesc">Add More</button>
+      </div>
+      <div class="desc" v-for="(desc,i) in artwork.description" :key="i">
+        {{desc}}
+        <div class="close-btn" @click="deleteDesc(desc)">X</div>
+      </div>
     </div>
     <button class="post-btn" @click="postArtwork">Post</button>
     <button class="sign-out" @click="logout">Logout</button>
@@ -65,6 +77,18 @@ export default {
       this.tag = "";
       this.desc = "";
     },
+    deleteTags(tag) {
+      const index = this.artwork.tags.indexOf(tag);
+      if(index > -1) {
+        this.artwork.tags.splice(index, 1);
+      }
+    },
+    deleteDesc(desc) {
+      const index = this.artwork.description.indexOf(desc);
+      if(index > -1) {
+        this.artwork.description.splice(index, 1);
+      }
+    },
     logout() {
       firebase
         .auth()
@@ -114,6 +138,10 @@ export default {
   align-items: center;
 }
 
+.col {
+  flex-direction: column;
+}
+
 input {
   margin: 1.2em 0;
   border: none;
@@ -128,15 +156,33 @@ input:focus {
 }
 
 textarea {
-  border: none;
-  border-bottom: 2px solid #dfe1e5;
-  /* border-radius: 1em; */
+  border: 2px solid #dfe1e5;
+  border-radius: 1em;
   padding: 0.6em;
 }
 
 textarea:focus {
   outline: none;
-  border-bottom: 2px solid #ffdd00;
+  border: 2px solid #ffdd00;
+}
+
+.desc {
+  background: #96B1AC;
+  color: #fff;
+  padding: 0.5em;
+  border-radius: 0.4em;
+  margin: 0.5em auto;
+  font-weight: 500;
+  position: relative;
+}
+
+.close-btn {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 1em;
 }
 
 .add-btn {
