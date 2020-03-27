@@ -207,7 +207,7 @@ export default {
 }
 
 .navbar .nav-links a.router-link-exact-active {
-  border-bottom: 3px solid #fbb034;
+  /* border-bottom: 3px solid #fbb034; */
   height: 18px;
   /* width: fit-content; */
 }
@@ -232,7 +232,7 @@ export default {
   }
   .nav-links {
     position: fixed;
-    background: linear-gradient(to right, rgba(251,176,52, 0.9), rgba(255,221,0, 0.8));
+    background: linear-gradient(to right, rgba(251,176,52, 1), rgba(255,221,0, 1));
     height: 48vh;
     width: 100%;
     margin-top: -10vh;
@@ -250,7 +250,9 @@ export default {
     color: #000;
   }
   .nav-item {
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    font-size: 1.3em;
   }
   .nav-links.open {
     top: 0;
@@ -259,10 +261,23 @@ export default {
   .logo {
     margin-left: 40px;
   }
-  .navbar .nav-links a.router-link-exact-active {
+  nav .nav-links a.router-link-exact-active {
+    /* color: #fff; */
     border-bottom: none;
-    color: #fff;
+    position: relative;
   }
+
+  nav .nav-links a.router-link-exact-active::before {
+    content: ''; 
+    position: absolute;
+    width: 5em;
+    height: 0.6em;
+    background: #fff;
+    bottom: 18px;
+    left: 0;
+    z-index: -1;
+  }
+
   .navbar .nav-links a:hover {
     color: #fff;
   }
